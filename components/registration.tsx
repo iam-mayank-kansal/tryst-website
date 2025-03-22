@@ -10,9 +10,9 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
-import { toast } from "@/hooks/use-toast"
 import axios from "axios"
-import { ReloadIcon } from "@radix-ui/react-icons" // Import a loading spinner
+import { ReloadIcon } from "@radix-ui/react-icons" // Import loading spinner
+import toast, { Toaster } from "react-hot-toast" // Import react-hot-toast
 
 // Form schemas for validation
 const generalFormSchema = z.object({
@@ -64,81 +64,43 @@ export default function Registration() {
     },
   })
 
-  async function onGeneralSubmit(values: z.infer<typeof generalFormSchema>) {
+  const handleSubmit = async (
+    values: z.infer<typeof generalFormSchema> | z.infer<typeof eventFormSchema>,
+    endpoint: string,
+    successMessage: string,
+    form: any
+  ) => {
     try {
-      // Fetch all normal registrations (optional validation)
-      const { data: allRegistrations } = await axios.get("/api/normal-registration")
-      console.log("All Normal Registrations:", allRegistrations)
+      // Fetch all registrations (optional validation)
+      const { data: allRegistrations } = await axios.get(`/api/${endpoint}`)
+      console.log(`All ${endpoint} Registrations:`, allRegistrations)
 
       // Check if the user already submitted before
       const alreadySubmitted = allRegistrations.some(
         (registration: any) => registration.email === values.email
       )
       if (alreadySubmitted) {
-        toast({
-          title: "Registration Failed",
-          description: "You have already registered with this email.",
-          variant: "destructive",
-        })
+        toast.error(`You have already registered ${endpoint === "normal-registration" ? "for TRYST 2025" : `for ${(values as z.infer<typeof eventFormSchema>).event}`}.`)
         return
       }
 
       // Send form data to backend
-      const { data } = await axios.post("/api/normal-registration", values)
+      const { data } = await axios.post(`/api/${endpoint}`, values)
       console.log("Response from server:", data)
 
-      toast({
-        title: "Registration Successful!",
-        description: "You have successfully registered for TRYST 2025.",
-      })
-      generalForm.reset()
+      toast.success(successMessage)
+      form.reset()
     } catch (error) {
       console.error("Error submitting form:", error)
-      toast({
-        title: "Registration Failed",
-        description: "An error occurred while submitting the form. Please try again.",
-        variant: "destructive",
-      })
+      toast.error("An error occurred while submitting the form. Please try again.")
     }
   }
 
-  async function onEventSubmit(values: z.infer<typeof eventFormSchema>) {
-    try {
-      // Fetch all event registrations (optional validation)
-      const { data: allEventRegistrations } = await axios.get("/api/event-registration")
-      console.log("All Event Registrations:", allEventRegistrations)
+  const onGeneralSubmit = (values: z.infer<typeof generalFormSchema>) =>
+    handleSubmit(values, "normal-registration", "You have successfully registered for TRYST 2025.", generalForm)
 
-      // Check if the user already submitted before
-      const alreadySubmitted = allEventRegistrations.some(
-        (registration: any) => registration.email === values.email
-      )
-      if (alreadySubmitted) {
-        toast({
-          title: "Registration Failed",
-          description: "You have already registered for an event with this email.",
-          variant: "destructive",
-        })
-        return
-      }
-
-      // Send form data to backend
-      const { data } = await axios.post("/api/event-registration", values)
-      console.log("Response from server:", data)
-
-      toast({
-        title: "Event Registration Successful!",
-        description: `You have successfully registered for ${values.event}.`,
-      })
-      eventForm.reset()
-    } catch (error) {
-      console.error("Error submitting form:", error)
-      toast({
-        title: "Registration Failed",
-        description: "An error occurred while submitting the form. Please try again.",
-        variant: "destructive",
-      })
-    }
-  }
+  const onEventSubmit = (values: z.infer<typeof eventFormSchema>) =>
+    handleSubmit(values, "event-registration", `You have successfully registered for ${values.event}.`, eventForm)
 
   return (
     <section id="registration" className="py-20 bg-[#130520] relative z-20">
@@ -430,6 +392,7 @@ export default function Registration() {
           </Tabs>
         </div>
       </div>
+      <Toaster position="top-center" /> {/* Add Toaster for toast notifications */}
     </section>
   )
 }

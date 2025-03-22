@@ -5,62 +5,10 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { motion } from "framer-motion"; // Import Framer Motion
+import { artists, Artist } from "@/utils/data"; // Import dummy data
 
 export default function Artists() {
   const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
-
-  interface Artist {
-    id: number;
-    name: string;
-    genre: string;
-    image: string;
-    bio: string;
-  }
-
-  const artists: Artist[] = [
-    {
-      id: 1,
-      name: "B PRAAK",
-      genre: "Pop",
-      image: "/artist/BPRAAK.png",
-      bio: "B PRAAK is a celebrated playback singer and music composer in Bollywood, known for his soulful voice and hit songs like 'Mann Bharryaa' and 'Filhall'. He is extremely popular among the youth.",
-    },
-    {
-      id: 2,
-      name: "Jassie Gill",
-      genre: "Punjabi",
-      image: "/artist/jassie_gill.jpg",
-      bio: "Jassie Gill is a popular Punjabi singer and actor, famous for his melodious voice and energetic performances in both music and films. His songs like 'Patiala Peg' and 'Leke Pehla Pehla Pyaar' are youth favorites.",
-    },
-    {
-      id: 3,
-      name: "Milind Gaba",
-      genre: "Pop",
-      image: "/artist/milind_gaba.webp",
-      bio: "Milind Gaba is a well-known Indian singer and music composer, recognized for his catchy tunes and vibrant stage presence. His songs like 'She Don't Know' and 'High Rated Gabru' are widely loved by young audiences.",
-    },
-    {
-      id: 4,
-      name: "IKKA",
-      genre: "Hip Hop",
-      image: "/artist/Ikka.jpg",
-      bio: "IKKA is a renowned Indian rapper and lyricist known for his impactful verses and contributions to the Indian hip-hop scene. His collaborations with artists like Badshah and Divine make him a favorite among the youth.",
-    },
-    {
-      id: 5,
-      name: "NIKK",
-      genre: "Pop",
-      image: "/artist/nikk.jpg",
-      bio: "NIKK is a rising star in the music industry, known for her versatile voice and captivating performances. Her recent hits have made her a popular choice among young listeners.",
-    },
-    {
-      id: 6,
-      name: "Antariksi",
-      genre: "Electronic",
-      image: "/artist/Antariksh.jpg",
-      bio: "Antariksi is known for blending electronic beats with classical Indian music, creating a unique fusion experience that has captivated audiences worldwide. Her experimental sound appeals to the younger generation.",
-    },
-  ];
 
   // Animation Variants
   const containerVariants = {

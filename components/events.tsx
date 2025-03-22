@@ -5,72 +5,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Clock, MapPin } from 'lucide-react'
 import { motion, Variants } from "framer-motion"
+import { events } from "@/utils/data" // Import dummy data
 
 export default function Events() {
   const [activeDay, setActiveDay] = useState("day1")
-
-  const events = {
-    day1: [
-      {
-        title: "Hackathon",
-        time: "10:00 AM - 8:00 PM",
-        venue: "Computer Lab",
-        description: "24-hour coding competition to build innovative solutions.",
-      },
-      {
-        title: "Battle of Bands",
-        time: "4:00 PM - 7:00 PM",
-        venue: "Main Stage",
-        description: "Music competition featuring the best college bands.",
-      },
-      {
-        title: "Art Exhibition",
-        time: "11:00 AM - 6:00 PM",
-        venue: "Art Gallery",
-        description: "Showcase of student artwork from across universities.",
-      },
-    ],
-    day2: [
-      {
-        title: "Dance Competition",
-        time: "2:00 PM - 5:00 PM",
-        venue: "Auditorium",
-        description: "Solo and group dance performances across various styles.",
-      },
-      {
-        title: "Fashion Show",
-        time: "6:00 PM - 8:00 PM",
-        venue: "Main Stage",
-        description: "Student designers showcase their creative collections.",
-      },
-      {
-        title: "Treasure Hunt",
-        time: "11:00 AM - 3:00 PM",
-        venue: "Campus Wide",
-        description: "Team-based competition to solve clues and find treasures.",
-      },
-    ],
-    day3: [
-      {
-        title: "Celebrity Performance",
-        time: "7:00 PM - 10:00 PM",
-        venue: "Main Stage",
-        description: "Special performance by a surprise celebrity artist.",
-      },
-      {
-        title: "Debate Competition",
-        time: "1:00 PM - 4:00 PM",
-        venue: "Conference Hall",
-        description: "Inter-college debate on contemporary topics.",
-      },
-      {
-        title: "Award Ceremony",
-        time: "5:00 PM - 6:30 PM",
-        venue: "Auditorium",
-        description: "Closing ceremony and distribution of prizes to winners.",
-      },
-    ],
-  }
 
   // Animation Variants
   const containerVariants: Variants = {

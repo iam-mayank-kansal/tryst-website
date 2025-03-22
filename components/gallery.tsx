@@ -5,45 +5,10 @@ import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { motion, Variants } from "framer-motion";
+import { galleryImages } from "@/utils/data"; // Import dummy data
 
 export default function Gallery() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
-  const galleryImages = {
-    "2024": [
-      "/gallery/gallery_2024_2.jpg",
-      "/gallery/gallery_2024_9.jpg",
-      "/gallery/gallery_2024_8.jpg",
-      "/gallery/gallery_2024_3.jpg",
-      "/gallery/gallery_2024_4.jpg",
-      "/gallery/gallery_2024_7.jpg",
-      "/gallery/gallery_2024_5.jpg",
-      "/gallery/gallery_2024_6.jpg",
-      "/gallery/gallery_2024_1.jpg",
-    ],
-    "2023": [
-      "/gallery/gallery_2024_8.jpg",
-      "/gallery/gallery_2024_3.jpg",
-      "/gallery/gallery_2024_9.jpg",
-      "/gallery/gallery_2024_5.jpg",
-      "/gallery/gallery_2024_7.jpg",
-      "/gallery/gallery_2024_1.jpg",
-      "/gallery/gallery_2024_4.jpg",
-      "/gallery/gallery_2024_6.jpg",
-      "/gallery/gallery_2024_2.jpg",
-    ],
-    "2022": [
-      "/gallery/gallery_2024_2.jpg",
-      "/gallery/gallery_2024_3.jpg",
-      "/gallery/gallery_2024_7.jpg",
-      "/gallery/gallery_2024_9.jpg",
-      "/gallery/gallery_2024_8.jpg",
-      "/gallery/gallery_2024_4.jpg",
-      "/gallery/gallery_2024_5.jpg",
-      "/gallery/gallery_2024_6.jpg",
-      "/gallery/gallery_2024_1.jpg",
-    ],
-  };
 
   // Animation Variants
   const containerVariants: Variants = {

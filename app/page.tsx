@@ -2,7 +2,6 @@ import Hero from "@/components/hero"
 import About from "@/components/about"
 import Events from "@/components/events"
 import Artists from "@/components/artists"
-// import FoodZone from "@/components/food-zone"
 import Registration from "@/components/registration"
 import Gallery from "@/components/gallery"
 import Contact from "@/components/contact"
@@ -15,7 +14,6 @@ export default function Home() {
       <About />
       <Events />
       <Artists />
-      {/* <FoodZone /> */}
       <Registration />
       <Gallery />
       <Contact />

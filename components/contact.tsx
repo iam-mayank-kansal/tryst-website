@@ -1,5 +1,4 @@
 "use client"
-
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
@@ -9,9 +8,9 @@ import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Mail, Phone } from "lucide-react"
-import { toast } from "@/hooks/use-toast"
 import axios from "axios"
 import { ReloadIcon } from "@radix-ui/react-icons" // Import loading spinner
+import toast, { Toaster } from "react-hot-toast" // Import react-hot-toast
 
 // Zod schema for form validation
 const contactFormSchema = z.object({
@@ -34,7 +33,7 @@ export default function Contact() {
     },
   })
 
-  async function onSubmit(values: z.infer<typeof contactFormSchema>) {
+  const onSubmit = async (values: z.infer<typeof contactFormSchema>) => {
     try {
       // Fetch all contacts (optional validation)
       const { data: allContacts } = await axios.get("/api/contact")
@@ -43,11 +42,7 @@ export default function Contact() {
       // Check if the user already submitted before (optional validation)
       const alreadySubmitted = allContacts.some((contact: any) => contact.email === values.email)
       if (alreadySubmitted) {
-        toast({
-          title: "Request Failed",
-          description: "You have already submitted the form.",
-          variant: "destructive",
-        })
+        toast.error("You have already submitted the form.")
         return
       }
 
@@ -55,18 +50,11 @@ export default function Contact() {
       const { data } = await axios.post("/api/contact", values)
       console.log("Response from server:", data)
 
-      toast({
-        title: "Message Sent!",
-        description: "We'll get back to you as soon as possible.",
-      })
+      toast.success("Message sent! We'll get back to you as soon as possible.")
       form.reset() // Reset form after successful submission
     } catch (error) {
       console.error("Error sending message:", error)
-      toast({
-        title: "Try Again",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive",
-      })
+      toast.error("Failed to send message. Please try again.")
     }
   }
 
@@ -228,6 +216,7 @@ export default function Contact() {
           </div>
         </div>
       </div>
+      <Toaster position="top-center" /> {/* Add Toaster for toast notifications */}
     </section>
   )
 }

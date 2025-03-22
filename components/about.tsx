@@ -1,28 +1,11 @@
-"use client" // Mark this component as a Client Component
+"use client"; // Mark this component as a Client Component
 
-import { motion, type Variants } from "framer-motion"
-import { Calendar, MapPin, Music } from "lucide-react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { motion, type Variants } from "framer-motion";
+import { Calendar, MapPin, Music } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { infoCards } from "@/utils/data"; // Import dummy data
 
 export default function About() {
-  const infoCards = [
-    {
-      icon: <MapPin className="h-8 w-8 text-[#ffcc00]" />,
-      title: "Venue",
-      description: "Keshav Mahavidyalaya Campus, Delhi University North Campus",
-    },
-    {
-      icon: <Calendar className="h-8 w-8 text-[#ffcc00]" />,
-      title: "Dates & Time",
-      description: "March 15-17, 2025 | 10:00 AM - 10:00 PM",
-    },
-    {
-      icon: <Music className="h-8 w-8 text-[#ffcc00]" />,
-      title: "Event Highlights",
-      description: "Live Performances, Dance Competitions, Hackathon, Food Festival",
-    },
-  ]
-
   // Animation Variants
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -32,17 +15,31 @@ export default function About() {
         staggerChildren: 0.3, // Stagger animations for children
       },
     },
-  }
+  };
 
   const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  }
+  };
 
   const fadeIn: Variants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { duration: 0.8 } },
-  }
+  };
+
+  // Dynamically render icons based on the icon name
+  const renderIcon = (iconName: string) => {
+    switch (iconName) {
+      case "MapPin":
+        return <MapPin className="h-8 w-8 text-[#ffcc00]" />;
+      case "Calendar":
+        return <Calendar className="h-8 w-8 text-[#ffcc00]" />;
+      case "Music":
+        return <Music className="h-8 w-8 text-[#ffcc00]" />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <section id="about" className="py-20 bg-[#1a0033] relative">
@@ -116,7 +113,7 @@ export default function About() {
             <motion.div key={index} variants={fadeInUp}>
               <Card className="bg-[#3a0066] border-none text-white hover:shadow-lg hover:shadow-[#ffcc00]/20 transition-all duration-300 h-full">
                 <CardHeader className="flex flex-col items-center p-3 sm:p-6">
-                  {card.icon}
+                  {renderIcon(card.icon)}
                   <CardTitle className="mt-4 text-xl">{card.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="text-center p-3 sm:p-6 pt-0 sm:pt-0">
@@ -128,6 +125,5 @@ export default function About() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
-
