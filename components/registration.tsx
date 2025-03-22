@@ -71,19 +71,6 @@ export default function Registration() {
     form: any
   ) => {
     try {
-      // Fetch all registrations (optional validation)
-      const { data: allRegistrations } = await axios.get(`/api/${endpoint}`)
-      console.log(`All ${endpoint} Registrations:`, allRegistrations)
-
-      // Check if the user already submitted before
-      const alreadySubmitted = allRegistrations.some(
-        (registration: any) => registration.email === values.email
-      )
-      if (alreadySubmitted) {
-        toast.error(`You have already registered ${endpoint === "normal-registration" ? "for TRYST 2025" : `for ${(values as z.infer<typeof eventFormSchema>).event}`}.`)
-        return
-      }
-
       // Send form data to backend
       const { data } = await axios.post(`/api/${endpoint}`, values)
       console.log("Response from server:", data)

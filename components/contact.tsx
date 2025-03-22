@@ -35,17 +35,6 @@ export default function Contact() {
 
   const onSubmit = async (values: z.infer<typeof contactFormSchema>) => {
     try {
-      // Fetch all contacts (optional validation)
-      const { data: allContacts } = await axios.get("/api/contact")
-      console.log("All Contacts:", allContacts)
-
-      // Check if the user already submitted before (optional validation)
-      const alreadySubmitted = allContacts.some((contact: any) => contact.email === values.email)
-      if (alreadySubmitted) {
-        toast.error("You have already submitted the form.")
-        return
-      }
-
       // Send form data to backend
       const { data } = await axios.post("/api/contact", values)
       console.log("Response from server:", data)
