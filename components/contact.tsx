@@ -24,11 +24,11 @@ export default function Contact() {
   const form = useForm<z.infer<typeof contactFormSchema>>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
-      name: "Mayank Kansal",
-      email: "mayank@gmail.com",
-      college: "Keshav mahavidyalaya",
-      course: "B.sc physical science",
-      message: "hell i am not able to login",
+      name: "",
+      email: "",
+      college: "",
+      course: "",
+      message: "",
     },
   })
 

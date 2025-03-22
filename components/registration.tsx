@@ -39,26 +39,26 @@ export default function Registration() {
   const generalForm = useForm<z.infer<typeof generalFormSchema>>({
     resolver: zodResolver(generalFormSchema),
     defaultValues: {
-      name: "Mayank Kansal",
-      college: "KMV",
-      rollNumber: "12234",
-      year: "2",
-      course: "bsc",
-      phone: "9310256281",
-      email: "mayank@gmail.com",
+      name: "",
+      college: "",
+      rollNumber: "",
+      year: "",
+      course: "",
+      phone: "",
+      email: "",
     },
   })
 
   const eventForm = useForm<z.infer<typeof eventFormSchema>>({
     resolver: zodResolver(eventFormSchema),
     defaultValues: {
-      name: "Mayank Kansal",
-      college: "KMV",
-      rollNumber: "12234",
-      event: "2",
-      phone: "9310256281",
-      email: "mayank@gmail.com",
-      teamMembers: "Ankit, Kartikay",
+      name: "",
+      college: "",
+      rollNumber: "",
+      event: "",
+      phone: "",
+      email: "",
+      teamMembers: "",
     },
   })
 
@@ -155,7 +155,7 @@ export default function Registration() {
 
         <div className="max-w-3xl mx-auto">
           <Tabs defaultValue="general" className="w-full" onValueChange={setActiveTab}>
-            
+
             <TabsList className="grid w-full grid-cols-2 mb-4 sm:mb-8 bg-[#3a0066] text-sm sm:text-base">
               <TabsTrigger
                 value="general"
