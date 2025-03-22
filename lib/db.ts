@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
 // Get the MongoDB URI from environment variables
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/tryst";
+
 // Throw an error if MONGODB_URI is missing
 if (!MONGODB_URI) {
     throw new Error("MONGODB_URI is missing from environment variables");
