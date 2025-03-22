@@ -10,8 +10,10 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Mail, Phone } from "lucide-react"
 import { toast } from "@/hooks/use-toast"
-import axios from "axios";
+import axios from "axios"
+import { ReloadIcon } from "@radix-ui/react-icons" // Import loading spinner
 
+// Zod schema for form validation
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Valid email is required." }),
@@ -32,41 +34,41 @@ export default function Contact() {
     },
   })
 
- async function onSubmit(values: z.infer<typeof contactFormSchema>) {
+  async function onSubmit(values: z.infer<typeof contactFormSchema>) {
     try {
-      // ✅ Fetch all contacts (if needed)
-      const { data: allContacts } = await axios.get("/api/contact");
-      console.log("All Contacts:", allContacts);
+      // Fetch all contacts (optional validation)
+      const { data: allContacts } = await axios.get("/api/contact")
+      console.log("All Contacts:", allContacts)
 
-      // ✅ Check if the user already submitted before (optional validation)
-      const alreadySubmitted = allContacts.some((contact: any) => contact.email === values.email);
+      // Check if the user already submitted before (optional validation)
+      const alreadySubmitted = allContacts.some((contact: any) => contact.email === values.email)
       if (alreadySubmitted) {
         toast({
           title: "Request Failed",
-          description: "You have already Submitted the Form.",
-        });
-        return;
+          description: "You have already submitted the form.",
+          variant: "destructive",
+        })
+        return
       }
 
-      // ✅ Send form data to backend
-      const { data } = await axios.post("/api/contact", values);
-      console.log("Response from server:", data);
+      // Send form data to backend
+      const { data } = await axios.post("/api/contact", values)
+      console.log("Response from server:", data)
 
       toast({
         title: "Message Sent!",
         description: "We'll get back to you as soon as possible.",
-      });
-      form.reset(); // Reset form after successful submission
+      })
+      form.reset() // Reset form after successful submission
     } catch (error) {
-      console.error("Error sending message:", error);
-    
+      console.error("Error sending message:", error)
       toast({
         title: "Try Again",
-        description: "Failed to Send Message",
-      });
+        description: "Failed to send message. Please try again.",
+        variant: "destructive",
+      })
     }
   }
-
 
   return (
     <section id="contact" className="py-20 bg-[#130520] relative z-20">
@@ -160,8 +162,19 @@ export default function Contact() {
                   )}
                 </div>
 
-                <Button type="submit" className="w-full bg-[#ffcc00] text-[#1a0033] hover:bg-[#ffcc00]/80">
-                  Send Message
+                <Button
+                  type="submit"
+                  className="w-full bg-[#ffcc00] text-[#1a0033] hover:bg-[#ffcc00]/80"
+                  disabled={form.formState.isSubmitting}
+                >
+                  {form.formState.isSubmitting ? (
+                    <div className="flex items-center">
+                      <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                      Sending...
+                    </div>
+                  ) : (
+                    "Send Message"
+                  )}
                 </Button>
               </form>
             </CardContent>
@@ -218,4 +231,3 @@ export default function Contact() {
     </section>
   )
 }
-

@@ -12,7 +12,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/hooks/use-toast"
 import axios from "axios"
+import { ReloadIcon } from "@radix-ui/react-icons" // Import a loading spinner
 
+// Form schemas for validation
 const generalFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   college: z.string().min(2, { message: "College name is required." }),
@@ -65,83 +67,83 @@ export default function Registration() {
   async function onGeneralSubmit(values: z.infer<typeof generalFormSchema>) {
     try {
       // Fetch all normal registrations (optional validation)
-      const { data: allRegistrations } = await axios.get("/api/normal-registration");
-      console.log("All Normal Registrations:", allRegistrations);
-  
+      const { data: allRegistrations } = await axios.get("/api/normal-registration")
+      console.log("All Normal Registrations:", allRegistrations)
+
       // Check if the user already submitted before
       const alreadySubmitted = allRegistrations.some(
         (registration: any) => registration.email === values.email
-      );
+      )
       if (alreadySubmitted) {
         toast({
           title: "Registration Failed",
           description: "You have already registered with this email.",
           variant: "destructive",
-        });
-        return;
+        })
+        return
       }
-  
+
       // Send form data to backend
-      const { data } = await axios.post("/api/normal-registration", values);
-      console.log("Response from server:", data);
-  
+      const { data } = await axios.post("/api/normal-registration", values)
+      console.log("Response from server:", data)
+
       toast({
         title: "Registration Successful!",
         description: "You have successfully registered for TRYST 2025.",
-      });
-      generalForm.reset(); 
+      })
+      generalForm.reset()
     } catch (error) {
-      console.error("Error submitting form:", error);
+      console.error("Error submitting form:", error)
       toast({
         title: "Registration Failed",
         description: "An error occurred while submitting the form. Please try again.",
         variant: "destructive",
-      });
+      })
     }
   }
 
   async function onEventSubmit(values: z.infer<typeof eventFormSchema>) {
     try {
       // Fetch all event registrations (optional validation)
-      const { data: allEventRegistrations } = await axios.get("/api/event-registration");
-      console.log("All Event Registrations:", allEventRegistrations);
-  
+      const { data: allEventRegistrations } = await axios.get("/api/event-registration")
+      console.log("All Event Registrations:", allEventRegistrations)
+
       // Check if the user already submitted before
       const alreadySubmitted = allEventRegistrations.some(
         (registration: any) => registration.email === values.email
-      );
+      )
       if (alreadySubmitted) {
         toast({
           title: "Registration Failed",
           description: "You have already registered for an event with this email.",
           variant: "destructive",
-        });
-        return;
+        })
+        return
       }
-  
+
       // Send form data to backend
-      const { data } = await axios.post("/api/event-registration", values);
-      console.log("Response from server:", data);
-  
+      const { data } = await axios.post("/api/event-registration", values)
+      console.log("Response from server:", data)
+
       toast({
         title: "Event Registration Successful!",
         description: `You have successfully registered for ${values.event}.`,
-      });
-      eventForm.reset(); 
+      })
+      eventForm.reset()
     } catch (error) {
-      console.error("Error submitting form:", error);
+      console.error("Error submitting form:", error)
       toast({
         title: "Registration Failed",
         description: "An error occurred while submitting the form. Please try again.",
         variant: "destructive",
-      });
+      })
     }
   }
 
   return (
     <section id="registration" className="py-20 bg-[#130520] relative z-20">
-      <div className="absolute h-full w-full inset-0 bg-[url('/fest_bg.jpg')] bg-cover bg-center opacity-25 -z-10 bg-fixed"></div>   
-         <div className="container mx-auto px-4">
+      <div className="absolute h-full w-full inset-0 bg-[url('/fest_bg.jpg')] bg-cover bg-center opacity-25 -z-10 bg-fixed"></div>
+      <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 sm:mb-4">
             <span className="text-[#ffcc00]">Registration</span>
@@ -155,7 +157,6 @@ export default function Registration() {
 
         <div className="max-w-3xl mx-auto">
           <Tabs defaultValue="general" className="w-full" onValueChange={setActiveTab}>
-
             <TabsList className="grid w-full grid-cols-2 mb-4 sm:mb-8 bg-[#3a0066] text-sm sm:text-base">
               <TabsTrigger
                 value="general"
@@ -281,8 +282,19 @@ export default function Registration() {
                       </div>
                     </div>
 
-                    <Button type="submit" className="w-full bg-[#ffcc00] text-[#1a0033] hover:bg-[#ffcc00]/80">
-                      Register
+                    <Button
+                      type="submit"
+                      className="w-full bg-[#ffcc00] text-[#1a0033] hover:bg-[#ffcc00]/80"
+                      disabled={generalForm.formState.isSubmitting}
+                    >
+                      {generalForm.formState.isSubmitting ? (
+                        <div className="flex items-center">
+                          <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                          Registering...
+                        </div>
+                      ) : (
+                        "Register"
+                      )}
                     </Button>
                   </form>
                 </CardContent>
@@ -397,14 +409,24 @@ export default function Registration() {
                       />
                     </div>
 
-                    <Button type="submit" className="w-full bg-[#ffcc00] text-[#1a0033] hover:bg-[#ffcc00]/80">
-                      Register for Event
+                    <Button
+                      type="submit"
+                      className="w-full bg-[#ffcc00] text-[#1a0033] hover:bg-[#ffcc00]/80"
+                      disabled={eventForm.formState.isSubmitting}
+                    >
+                      {eventForm.formState.isSubmitting ? (
+                        <div className="flex items-center">
+                          <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                          Registering...
+                        </div>
+                      ) : (
+                        "Register for Event"
+                      )}
                     </Button>
                   </form>
                 </CardContent>
               </Card>
             </TabsContent>
-
           </Tabs>
         </div>
       </div>

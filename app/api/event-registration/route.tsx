@@ -74,7 +74,7 @@ export async function POST(req: Request) {
     // Save event registration data
     const newEventRegistration = new EventRegistration(body);
     await newEventRegistration.save();
-
+3
     // Send Email
     const emailContent = emailTemplate(
       body.name,
