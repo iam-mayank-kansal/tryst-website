@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Clock, MapPin } from 'lucide-react'
 import { motion, Variants } from "framer-motion"
-import { events } from "@/utils/data" // Import dummy data
+import { events } from "@/utils/data" // Import updated dummy data
 
 export default function Events() {
   const [activeDay, setActiveDay] = useState("day1")
@@ -62,15 +62,12 @@ export default function Events() {
         </motion.div>
 
         <Tabs defaultValue="day1" className="w-full" onValueChange={setActiveDay}>
-          <TabsList className="grid w-full grid-cols-3 mb-4 sm:mb-8 bg-[#3a0066] text-sm sm:text-base">
+          <TabsList className="grid w-full grid-cols-2 mb-4 sm:mb-8 bg-[#3a0066] text-sm sm:text-base">
             <TabsTrigger value="day1" className="data-[state=active]:bg-[#ffcc00] data-[state=active]:text-[#1a0033]">
               Day 1
             </TabsTrigger>
             <TabsTrigger value="day2" className="data-[state=active]:bg-[#ffcc00] data-[state=active]:text-[#1a0033]">
               Day 2
-            </TabsTrigger>
-            <TabsTrigger value="day3" className="data-[state=active]:bg-[#ffcc00] data-[state=active]:text-[#1a0033]">
-              Day 3
             </TabsTrigger>
           </TabsList>
 
@@ -86,7 +83,7 @@ export default function Events() {
                 {events[day as keyof typeof events].map((event, index) => (
                   <motion.div key={index} variants={fadeInUp}>
                     <Card
-                      className="bg-[#3a0066] border-none text-white hover:shadow-lg hover:shadow-[#ffcc00]/20 transition-all duration-300"
+                      className="bg-[#3a0066] h-full border-[1px] border-gray-600 shadow-md text-white hover:shadow-lg hover:shadow-[#ffcc00]/20 transition-all duration-300"
                     >
                       <CardHeader className="p-3 sm:p-6">
                         <CardTitle className="text-lg sm:text-xl text-[#ffcc00]">{event.title}</CardTitle>
