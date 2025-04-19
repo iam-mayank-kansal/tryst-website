@@ -9,24 +9,35 @@ import Image from "next/image"
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [pastHero, setPastHero] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
+      // Check if scrolled down at all
       setScrolled(window.scrollY > 10)
+
+      // Check if we're past the hero section
+      const heroSection = document.getElementById("home")
+      const heroHeight = heroSection?.offsetHeight || 0
+      setPastHero(window.scrollY > heroHeight - 100)
     }
+
     window.addEventListener("scroll", handleScroll)
+    // Initial check on mount
+    handleScroll()
+
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   // Prevent body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = "hidden"
     } else {
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = "unset"
     }
     return () => {
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = "unset"
     }
   }, [isOpen])
 
@@ -44,10 +55,12 @@ export default function Navbar() {
     <nav
       className={cn(
         "fixed top-0 left-0 w-full z-50 transition-all duration-300",
-        scrolled ? "bg-[#1a0033]/90 backdrop-blur-md shadow-md" : "bg-transparent"
+        scrolled || pastHero
+          ? "bg-[#1a0033]/90 backdrop-blur-md shadow-md"
+          : "bg-gradient-to-b from-[#1a0033]/70 to-transparent backdrop-blur-sm",
       )}
     >
-      <div className="container mx-auto px-2 sm:px-4 flex justify-between items-center h-16 sm:h-20 relative">
+      <div className="container mx-auto px-2 sm:px-4 flex justify-between items-center h-16 sm:h-20 relative ">
         <Link href="#home" className="text-2xl font-bold text-white z-50">
           <Image
             src="/tryst_logo.png"
@@ -61,19 +74,15 @@ export default function Navbar() {
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center space-x-6">
           {navLinks.map((link) => (
-            <Link 
-              key={link.name} 
-              href={link.href} 
-              className="text-white hover:text-[#ffcc00] transition-colors"
-            >
+            <Link key={link.name} href={link.href} className="text-white hover:text-[#ffcc00] transition-colors">
               {link.name}
             </Link>
           ))}
         </div>
 
         {/* Mobile Navigation Toggle */}
-        <button 
-          className="lg:hidden text-white z-50 relative" 
+        <button
+          className="lg:hidden text-white z-50 relative"
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? "Close menu" : "Open menu"}
         >
@@ -84,8 +93,8 @@ export default function Navbar() {
       {/* Mobile Navigation Menu */}
       <div
         className={cn(
-          "fixed inset-0 bg-[#1a0033] z-40 lg:hidden transition-transform duration-300",
-          isOpen ? "translate-x-0" : "translate-x-full"
+          "fixed  inset-0 bg-[#1a0033] z-40 lg:hidden transition-transform duration-300",
+          isOpen ? "translate-x-0" : "translate-x-full",
         )}
       >
         <div className="container mx-auto px-4 flex flex-col space-y-2 sm:space-y-4 pt-24">

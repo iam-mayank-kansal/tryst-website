@@ -1,35 +1,42 @@
 "use client"
-
 import { useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Clock, ExternalLink, MapPin } from 'lucide-react'
-import { motion, Variants } from "framer-motion"
-import { events } from "@/utils/data" // Import updated dummy data
+import { Clock, ExternalLink, MapPin, ChevronDown } from 'lucide-react'
+import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "./ui/button"
+import { events } from "@/utils/data"
+
 
 export default function Events() {
   const [activeDay, setActiveDay] = useState("day1")
+  const [visibleCount, setVisibleCount] = useState({
+    day1: 4,
+    day2: 4
+  })
 
-  // Animation Variants
-  const containerVariants: Variants = {
+  const loadMore = (day: string) => {
+    setVisibleCount(prev => ({
+      ...prev,
+      [day]: prev[day as keyof typeof prev] + 2
+    }))
+  }
+
+  // Animation variants
+  const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.3,
-      },
-    },
+        when: "beforeChildren",
+        staggerChildren: 0.1
+      }
+    }
   }
 
-  const fadeInUp: Variants = {
+  const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  }
-
-  const fadeIn: Variants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.8 } },
+    visible: { opacity: 1, y: 0 }
   }
 
   return (
@@ -39,23 +46,22 @@ export default function Events() {
         <motion.div
           className="text-center mb-16"
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
+          animate="visible"
           variants={containerVariants}
         >
           <motion.h2
             className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 sm:mb-4"
-            variants={fadeInUp}
+            variants={itemVariants}
           >
             Event <span className="text-[#ffcc00]">Schedule</span>
           </motion.h2>
           <motion.div
             className="w-24 h-1 bg-[#ffcc00] mx-auto mb-8"
-            variants={fadeIn}
+            variants={itemVariants}
           ></motion.div>
           <motion.p
             className="text-white max-w-3xl mx-auto text-base sm:text-lg px-2"
-            variants={fadeInUp}
+            variants={itemVariants}
           >
             Explore our exciting lineup of events spread across two days of non-stop entertainment, competition, and
             creativity.
@@ -76,49 +82,73 @@ export default function Events() {
             <TabsContent key={day} value={day} className="mt-0">
               <motion.div
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
                 variants={containerVariants}
+                initial="hidden"
+                animate="visible"
               >
-                {events[day as keyof typeof events].map((event, index) => (
-                <motion.div key={index} variants={fadeInUp} className="flex flex-col">
-                <Card className="bg-[#3a0066] h-full border-[1px] border-gray-600 shadow-md text-white hover:shadow-lg hover:shadow-[#ffcc00]/20 transition-all duration-300 flex flex-col">
-                  <CardHeader className="p-3 sm:p-6 pb-0">
-                    <CardTitle className="text-lg sm:text-xl text-[#ffcc00]">{event.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="p-3 sm:p-6 flex flex-col flex-grow">
-                    <div className="flex-grow">
-                      {/* Event details (time, venue, description) */}
-                      <div className="flex items-center mb-2">
-                        <Clock className="h-4 w-4 mr-2 text-gray-300" />
-                        <CardDescription className="text-gray-300">{event.time}</CardDescription>
-                      </div>
-                      <div className="flex items-center mb-4">
-                        <MapPin className="h-4 w-4 mr-2 text-gray-300" />
-                        <CardDescription className="text-gray-300">{event.venue}</CardDescription>
-                      </div>
-                      <p className="text-white mb-4">{event.description}</p>
-                    </div>
-                    
-                    {/* Registration Button - always at bottom */}
-                    <div className="mt-auto pt-4">
-                      {event.registrationLink ? (
-                        <a href={event.registrationLink} target="_blank" rel="noopener noreferrer" className="w-full block">
-                          <Button variant="outline" className="w-full border-[#ffcc00] text-[#ffcc00] hover:bg-[#ffcc00]/10 flex items-center">
-                            Register Now
-                            <ExternalLink className="ml-2 h-4 w-4" />
-                          </Button>
-                        </a>
-                      ) : (
-                        <div className="h-10"></div> 
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
+                <AnimatePresence>
+                  {events[day as keyof typeof events]
+                    .slice(0, visibleCount[day as keyof typeof visibleCount])
+                    .map((event, index) => (
+                      <motion.div
+                        key={`${day}-${index}`}
+                        variants={itemVariants}
+                        transition={{ duration: 0.3 }}
+                        className="flex flex-col"
+                      >
+                        <Card className="bg-[#3a0066] h-full border-[1px] border-gray-600 shadow-md text-white hover:shadow-lg hover:shadow-[#ffcc00]/20 transition-all duration-300 flex flex-col">
+                          <CardHeader className="p-3 sm:p-6 pb-0">
+                            <CardTitle className="text-lg sm:text-xl text-[#ffcc00]">{event.title}</CardTitle>
+                          </CardHeader>
+                          <CardContent className="p-3 sm:p-6 flex flex-col flex-grow">
+                            <div className="flex-grow">
+                              <div className="flex items-center mb-2">
+                                <Clock className="h-4 w-4 mr-2 text-gray-300" />
+                                <CardDescription className="text-gray-300">{event.time}</CardDescription>
+                              </div>
+                              <div className="flex items-center mb-4">
+                                <MapPin className="h-4 w-4 mr-2 text-gray-300" />
+                                <CardDescription className="text-gray-300">{event.venue}</CardDescription>
+                              </div>
+                              <p className="text-white mb-4">{event.description}</p>
+                            </div>
+                            
+                            <div className="mt-auto pt-4">
+                              {event.registrationLink ? (
+                                <a href={event.registrationLink} target="_blank" rel="noopener noreferrer" className="w-full block">
+                                  <Button variant="outline" className="w-full border-[#ffcc00] text-[#ffcc00] hover:bg-[#ffcc00]/10 flex items-center">
+                                    Register Now
+                                    <ExternalLink className="ml-2 h-4 w-4" />
+                                  </Button>
+                                </a>
+                              ) : (
+                                <div className="h-10"></div>
+                              )}
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </motion.div>
+                    ))}
+                </AnimatePresence>
               </motion.div>
-                ))} 
-              </motion.div>
+
+              {events[day as keyof typeof events].length > visibleCount[day as keyof typeof visibleCount] && (
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                  className="mt-6 flex justify-center"
+                >
+                  <Button 
+                    onClick={() => loadMore(day)}
+                    variant="outline" 
+                    className="border-[#ffcc00] text-[#ffcc00] hover:bg-[#ffcc00]/10"
+                  >
+                    Show More
+                    <ChevronDown className="ml-2 h-4 w-4" />
+                  </Button>
+                </motion.div>
+              )}
             </TabsContent>
           ))}
         </Tabs>
