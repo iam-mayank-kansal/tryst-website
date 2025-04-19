@@ -11,8 +11,8 @@ import { events } from "@/utils/data"
 export default function Events() {
   const [activeDay, setActiveDay] = useState("day1")
   const [visibleCount, setVisibleCount] = useState({
-    day1: 4,
-    day2: 4
+    day1: 3,
+    day2: 3
   })
 
   const loadMore = (day: string) => {
