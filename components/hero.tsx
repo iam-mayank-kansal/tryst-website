@@ -21,7 +21,7 @@ export default function Hero() {
     setIsMounted(true)
     
     // Set the date for TRYST 2025
-    const festDate = new Date("2025-03-30T00:00:00").getTime()
+    const festDate = new Date("2025-04-21T00:00:00").getTime()
 
     const timer = setInterval(() => {
       const now = new Date().getTime()
@@ -36,7 +36,7 @@ export default function Hero() {
 
       if (distance < 0) {
         clearInterval(timer)
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 })
+        setTimeLeft({ days:0, hours: 0, minutes: 0, seconds: 0 })
       }
     }, 1000)
 
@@ -205,7 +205,7 @@ export default function Hero() {
               repeatType: "reverse"
             }}
           >
-            March 15-17, 2025 | Delhi, India
+            April 21-22, 2025 | Delhi, India
           </motion.p>
 
           {/* Countdown Timer */}

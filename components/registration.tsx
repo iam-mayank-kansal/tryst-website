@@ -11,8 +11,9 @@ import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import axios from "axios"
-import { ReloadIcon } from "@radix-ui/react-icons" // Import loading spinner
-import toast, { Toaster } from "react-hot-toast" // Import react-hot-toast
+import { ReloadIcon } from "@radix-ui/react-icons" 
+import toast, { Toaster } from "react-hot-toast" 
+import { events } from "@/utils/data"
 
 // Form schemas for validation
 const generalFormSchema = z.object({
@@ -37,6 +38,7 @@ const eventFormSchema = z.object({
 
 export default function Registration() {
   const [activeTab, setActiveTab] = useState("general")
+  const [selectedEvent, setSelectedEvent] = useState("")
 
   const generalForm = useForm<z.infer<typeof generalFormSchema>>({
     resolver: zodResolver(generalFormSchema),
@@ -88,6 +90,13 @@ export default function Registration() {
 
   const onEventSubmit = (values: z.infer<typeof eventFormSchema>) =>
     handleSubmit(values, "event-registration", `You have successfully registered for ${values.event}.`, eventForm)
+
+  // Get registration link for selected event
+  const getRegistrationLink = (eventTitle: string) => {
+    const allEvents = [...events.day1, ...events.day2]
+    const event = allEvents.find(e => e.title === eventTitle)
+    return event?.registrationLink || ""
+  }
 
   return (
     <section id="registration" className="py-20 bg-[#130520] relative z-20">
@@ -302,17 +311,30 @@ export default function Registration() {
 
                       <div className="space-y-2">
                         <Label htmlFor="event-selection">Select Event</Label>
-                        <Select onValueChange={(value) => eventForm.setValue("event", value)}>
+                        <Select 
+                          onValueChange={(value) => {
+                            eventForm.setValue("event", value)
+                            setSelectedEvent(value)
+                          }}
+                        >
                           <SelectTrigger className="bg-[#1a0033] border-[#660033] text-white">
                             <SelectValue placeholder="Select event" />
                           </SelectTrigger>
-                          <SelectContent className="bg-[#3a0066] text-white border-[#660033]">
-                            <SelectItem value="hackathon">Hackathon</SelectItem>
-                            <SelectItem value="dance">Dance Competition</SelectItem>
-                            <SelectItem value="battle-of-bands">Battle of Bands</SelectItem>
-                            <SelectItem value="fashion-show">Fashion Show</SelectItem>
-                            <SelectItem value="treasure-hunt">Treasure Hunt</SelectItem>
-                            <SelectItem value="debate">Debate Competition</SelectItem>
+                          <SelectContent className="bg-[#3a0066] text-white border-[#660033] max-h-[400px] overflow-y-auto">
+                            <optgroup label="Day 1 Events">
+                              {events.day1.map((event, index:number) => (
+                                <SelectItem key={`day1-${index}`} value={event.title}>
+                                  {event.title}
+                                </SelectItem>
+                              ))}
+                            </optgroup>
+                            <optgroup label="Day 2 Events">
+                              {events.day2.map((event, index:number) => (
+                                <SelectItem key={`day2-${index}`} value={event.title}>
+                                  {event.title}
+                                </SelectItem>
+                              ))}
+                            </optgroup>
                           </SelectContent>
                         </Select>
                         {eventForm.formState.errors.event && (
@@ -358,6 +380,29 @@ export default function Registration() {
                       />
                     </div>
 
+                    {/* External registration link button for specific events */}
+                    {getRegistrationLink(selectedEvent) && (
+                      <div className="flex flex-col space-y-4">
+                        <a 
+                          href={getRegistrationLink(selectedEvent)} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="w-full"
+                        >
+                          <Button
+                            type="button"
+                            variant="outline"
+                            className="w-full border-[#ffcc00] text-[#ffcc00] hover:bg-[#ffcc00]/10"
+                          >
+                            Register via External Form
+                          </Button>
+                        </a>
+                        <div className="text-center text-white text-sm">
+                          OR
+                        </div>
+                      </div>
+                    )}
+
                     <Button
                       type="submit"
                       className="w-full bg-[#ffcc00] text-[#1a0033] hover:bg-[#ffcc00]/80"
@@ -379,7 +424,7 @@ export default function Registration() {
           </Tabs>
         </div>
       </div>
-      <Toaster position="top-center" /> {/* Add Toaster for toast notifications */}
+      <Toaster position="top-center" />
     </section>
   )
 }

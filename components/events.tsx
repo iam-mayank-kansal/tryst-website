@@ -3,9 +3,10 @@
 import { useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Clock, MapPin } from 'lucide-react'
+import { Clock, ExternalLink, MapPin } from 'lucide-react'
 import { motion, Variants } from "framer-motion"
 import { events } from "@/utils/data" // Import updated dummy data
+import { Button } from "./ui/button"
 
 export default function Events() {
   const [activeDay, setActiveDay] = useState("day1")
@@ -16,7 +17,7 @@ export default function Events() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.3, // Stagger animations for children
+        staggerChildren: 0.3,
       },
     },
   }
@@ -56,7 +57,7 @@ export default function Events() {
             className="text-white max-w-3xl mx-auto text-base sm:text-lg px-2"
             variants={fadeInUp}
           >
-            Explore our exciting lineup of events spread across three days of non-stop entertainment, competition, and
+            Explore our exciting lineup of events spread across two days of non-stop entertainment, competition, and
             creativity.
           </motion.p>
         </motion.div>
@@ -81,27 +82,42 @@ export default function Events() {
                 variants={containerVariants}
               >
                 {events[day as keyof typeof events].map((event, index) => (
-                  <motion.div key={index} variants={fadeInUp}>
-                    <Card
-                      className="bg-[#3a0066] h-full border-[1px] border-gray-600 shadow-md text-white hover:shadow-lg hover:shadow-[#ffcc00]/20 transition-all duration-300"
-                    >
-                      <CardHeader className="p-3 sm:p-6">
-                        <CardTitle className="text-lg sm:text-xl text-[#ffcc00]">{event.title}</CardTitle>
-                      </CardHeader>
-                      <CardContent className="p-3 sm:p-6 pt-0 sm:pt-0">
-                        <div className="flex items-center mb-2">
-                          <Clock className="h-4 w-4 mr-2 text-gray-300" />
-                          <CardDescription className="text-gray-300">{event.time}</CardDescription>
-                        </div>
-                        <div className="flex items-center mb-4">
-                          <MapPin className="h-4 w-4 mr-2 text-gray-300" />
-                          <CardDescription className="text-gray-300">{event.venue}</CardDescription>
-                        </div>
-                        <p className="text-white">{event.description}</p>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                ))}
+                <motion.div key={index} variants={fadeInUp} className="flex flex-col">
+                <Card className="bg-[#3a0066] h-full border-[1px] border-gray-600 shadow-md text-white hover:shadow-lg hover:shadow-[#ffcc00]/20 transition-all duration-300 flex flex-col">
+                  <CardHeader className="p-3 sm:p-6 pb-0">
+                    <CardTitle className="text-lg sm:text-xl text-[#ffcc00]">{event.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-3 sm:p-6 flex flex-col flex-grow">
+                    <div className="flex-grow">
+                      {/* Event details (time, venue, description) */}
+                      <div className="flex items-center mb-2">
+                        <Clock className="h-4 w-4 mr-2 text-gray-300" />
+                        <CardDescription className="text-gray-300">{event.time}</CardDescription>
+                      </div>
+                      <div className="flex items-center mb-4">
+                        <MapPin className="h-4 w-4 mr-2 text-gray-300" />
+                        <CardDescription className="text-gray-300">{event.venue}</CardDescription>
+                      </div>
+                      <p className="text-white mb-4">{event.description}</p>
+                    </div>
+                    
+                    {/* Registration Button - always at bottom */}
+                    <div className="mt-auto pt-4">
+                      {event.registrationLink ? (
+                        <a href={event.registrationLink} target="_blank" rel="noopener noreferrer" className="w-full block">
+                          <Button variant="outline" className="w-full border-[#ffcc00] text-[#ffcc00] hover:bg-[#ffcc00]/10 flex items-center">
+                            Register Now
+                            <ExternalLink className="ml-2 h-4 w-4" />
+                          </Button>
+                        </a>
+                      ) : (
+                        <div className="h-10"></div> 
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+                ))} 
               </motion.div>
             </TabsContent>
           ))}

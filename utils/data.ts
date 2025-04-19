@@ -1,147 +1,130 @@
+// Event data
+
 export const events = {
     day1: [
-        {
-            title: "Nrityaang - UTHAAN (Solo Classical Dance)",
-            time: "10:15 AM - 11:30 AM",
-            venue: "Auditorium",
-            description: "Elegance meets tradition! Witness mesmerizing classical moves in a solo spectacle.",
-        },
-        {
-            title: "MRIDANG (Group Folk Dance)",
-            time: "11:45 AM - 1:15 PM",
-            venue: "Auditorium",
-            description: "Vibrant beats, colorful swirls—folk tales come alive in this electrifying dance battle!",
-        },
-        {
-            title: "Advaitaa - Nazaat (Western Solo Dance)",
-            time: "2:00 PM - 3:30 PM",
-            venue: "Auditorium",
-            description: "One stage, one performer, infinite energy! Get ready for jaw-dropping Western moves!",
-        },
-        {
-            title: "Inaayat (Western Group Dance)",
-            time: "3:45 PM - 6:00 PM",
-            venue: "Auditorium",
-            description: "Teamwork, passion, and flawless moves—watch groups own the dance floor!",
-        },
-        {
-            title: "Shades (Street Play Competition)",
-            time: "10:00 AM - 3:00 PM",
-            venue: "Shades Lawn",
-            description: "Unfiltered. Unapologetic. Street theatre that makes you think, feel, and act!",
-        },
-        {
-            title: "Results Announcement",
-            time: "3:15 PM - 3:30 PM",
-            venue: "Shades Lawn",
-            description: "",
-        },
-        {
-            title: "DebSoc (Debate Competition)",
-            time: "10:00 AM - 5:00 PM",
-            venue: "Seminar Room",
-            description: "Fiery arguments, razor-sharp wit—only the best debater will rise to the top!",
-        },
-        {
-            title: "Maniera: Atrang Rangmanch (Art Exhibition)",
-            time: "11:00 AM - 3:00 PM",
-            venue: "Lecture Hall 1",
-            description: "A creative explosion of colors, strokes, and imagination—an artist's paradise!",
-        },
-        {
-            title: "Chitrakala (Solo Painting Competition)",
-            time: "11:00 AM - 2:00 PM",
-            venue: "LT-1",
-            description: "One canvas, one vision—watch artists bring their thoughts to life!",
-        },
-        {
-            title: "Kala Sangini (Duo Painting Competition)",
-            time: "11:00 AM - 2:00 PM",
-            venue: "LT-3",
-            description: "Two minds, one masterpiece! A fusion of creativity like never before!",
-        },
-        {
-            title: "Illuminati (Competitions)",
-            time: "9:00 AM - 6:00 PM",
-            venue: "Lecture Hall-2 (Room Numbers: 111, 110, 109, 108)",
-            description: "From brain teasers to skill battles—only the sharpest minds will win!",
-        },
-        {
-            title: "Vagmita (Literary Events)",
-            time: "9:00 AM - 5:00 PM",
-            venue: "LT-4",
-            description: "Where words weave magic—poetry, storytelling, and literature at its best!",
-        },
-        {
-            title: "Anhad (Battle of Bands)",
-            time: "10:00 AM - 1:00 PM",
-            venue: "Amphitheatre",
-            description: "Drums rolling, guitars roaring—bands clash in a high-voltage musical war!",
-        },
-        {
-            title: "Performance Showcase",
-            time: "2:00 PM - 4:30 PM",
-            venue: "Amphitheatre",
-            description: "Surprise acts, guest stars, and pure entertainment—don't miss the magic!",
-        },
-        {
-            title: "DJ Night (If Stage Available)",
-            time: "5:00 PM - 8:00 PM",
-            venue: "Amphitheatre",
-            description: "Lights, beats, and endless moves—dance till you drop!",
-        },
+      {
+        title: "Nrityaang - UTHAAN (Solo Classical Dance)",
+        time: "10:15 AM - 11:30 AM",
+        venue: "Auditorium",
+        description: "Elegance meets tradition! Witness mesmerizing classical moves in a solo spectacle.",
+        registrationLink: "https://forms.gle/BonDTesEN9sAcoSQ8" // For UTHAAN
+      },
+      {
+        title: "MRIDANG (Group Folk Dance)",
+        time: "11:45 AM - 1:15 PM",
+        venue: "Auditorium",
+        description: "Vibrant beats, colorful swirls—folk tales come alive in this electrifying dance battle!",
+        registrationLink: "https://forms.gle/YeM5Usg2oorNmNK88" // For MRIDANG
+      },
+      {
+        title: "Advaitaa - Nazaat (Western Solo Dance)",
+        time: "2:00 PM - 3:30 PM",
+        venue: "Auditorium",
+        description: "One stage, one performer, infinite energy! Get ready for jaw-dropping Western moves!"
+      },
+      {
+        title: "Inaayat (Western Group Dance)",
+        time: "3:45 PM - 6:00 PM",
+        venue: "Auditorium",
+        description: "Teamwork, passion, and flawless moves—watch groups own the dance floor!"
+      },
+      {
+        title: "Shades (Street Play Competition)",
+        time: "10:00 AM - 3:00 PM",
+        venue: "Shades Lawn",
+        description: "Unfiltered. Unapologetic. Street theatre that makes you think, feel, and act!"
+      },
+      {
+        title: "DebSoc (Debate Competition)",
+        time: "10:00 AM - 5:00 PM",
+        venue: "Seminar Room",
+        description: "Fiery arguments, razor-sharp wit—only the best debater will rise to the top!"
+      },
+      {
+        title: "Maniera: Atrang Rangmanch (Art Exhibition)",
+        time: "11:00 AM - 3:00 PM",
+        venue: "Lecture Hall 1",
+        description: "A creative explosion of colors, strokes, and imagination—an artist's paradise!",
+        registrationLink: "https://linktr.ee/ManieraKmv"
+      },
+      {
+        title: "Chitrakala (Solo Painting Competition)",
+        time: "11:00 AM - 2:00 PM",
+        venue: "LT-1",
+        description: "One canvas, one vision—watch artists bring their thoughts to life!"
+      },
+      {
+        title: "Kala Sangini (Duo Painting Competition)",
+        time: "11:00 AM - 2:00 PM",
+        venue: "LT-3",
+        description: "Two minds, one masterpiece! A fusion of creativity like never before!"
+      },
+      {
+        title: "Illuminati (Competitions)",
+        time: "9:00 AM - 6:00 PM",
+        venue: "Lecture Hall-2",
+        description: "From brain teasers to skill battles—only the sharpest minds will win!"
+      },
+      {
+        title: "Vagmita (Literary Events)",
+        time: "9:00 AM - 5:00 PM",
+        venue: "LT-4",
+        description: "Where words weave magic—poetry, storytelling, and literature at its best!",
+        registrationLink: "https://linktr.ee/PoetryVagmita?utm_source=linktree_admin_share"
+      },
+      {
+        title: "Anhad (Battle of Bands)",
+        time: "10:00 AM - 1:00 PM",
+        venue: "Amphitheatre",
+        description: "Drums rolling, guitars roaring—bands clash in a high-voltage musical war!"
+      },
+      {
+        title: "Performance Showcase",
+        time: "2:00 PM - 4:30 PM",
+        venue: "Amphitheatre",
+        description: "Surprise acts, guest stars, and pure entertainment—don't miss the magic!"
+      }
     ],
     day2: [
-        {
-            title: "Shades – Mime Competition",
-            time: "10:00 AM - 12:00 PM",
-            venue: "Auditorium",
-            description: "Actions speak louder than words—watch silent stories come to life!",
-        },
-        {
-            title: "Naksh – Envogue (Group Fashion Competition)",
-            time: "2:00 PM - 5:00 PM",
-            venue: "Auditorium",
-            description: "Strut, slay, and own the runway—fashion meets passion!",
-        },
-        {
-            title: "DebSoc – Panel Discussion & Awards",
-            time: "10:00 AM - 12:00 PM",
-            venue: "Seminar Room",
-            description: "Intellect meets debate—witness insights, ideas, and inspiration.",
-        },
-        {
-            title: "Cultural Committee – Closing Remarks",
-            time: "12:30 PM - 1:00 PM",
-            venue: "Seminar Room",
-            description: "A heartfelt goodbye, until we meet again!",
-        },
-        {
-            title: "Illuminati – Photography Competitions",
-            time: "9:00 AM - 5:00 PM",
-            venue: "Lecture Hall 1 & 2",
-            description: "Freeze the moment, frame the magic—where every click tells a story!",
-        },
-        {
-            title: "Vagmita – Poetry Slam",
-            time: "10:00 AM - 12:00 PM",
-            venue: "LT 4",
-            description: "Verses with voices, emotions that echo!",
-        },
-        {
-            title: "Anhad – Final Performances",
-            time: "12:00 PM - 2:00 PM",
-            venue: "Amphitheatre",
-            description: "Melodies, magic, and musical mastery—witness the grand finale!",
-        },
-        {
-            title: "DJ Night (If Stage Available)",
-            time: "5:00 PM - 8:00 PM",
-            venue: "Amphitheatre",
-            description: "Lights, beats, and endless vibes—dance the night away!",
-        },
-    ],
-};
+      {
+        title: "Shades – Mime Competition",
+        time: "10:00 AM - 12:00 PM",
+        venue: "Auditorium",
+        description: "Actions speak louder than words—watch silent stories come to life!"
+      },
+      {
+        title: "Naksh – Envogue (Group Fashion Competition)",
+        time: "2:00 PM - 5:00 PM",
+        venue: "Auditorium",
+        description: "Strut, slay, and own the runway—fashion meets passion!"
+      },
+      {
+        title: "DebSoc – Panel Discussion & Awards",
+        time: "10:00 AM - 12:00 PM",
+        venue: "Seminar Room",
+        description: "Intellect meets debate—witness insights, ideas, and inspiration."
+      },
+      {
+        title: "Illuminati – Photography Competitions",
+        time: "9:00 AM - 5:00 PM",
+        venue: "Lecture Hall 1 & 2",
+        description: "Freeze the moment, frame the magic—where every click tells a story!"
+      },
+      {
+        title: "Vagmita – Poetry Slam",
+        time: "10:00 AM - 12:00 PM",
+        venue: "LT 4",
+        description: "Verses with voices, emotions that echo!",
+        registrationLink: "https://forms.gle/e1LacJugmYVU81kj9"
+      },
+      {
+        title: "Anhad – Final Performances",
+        time: "12:00 PM - 2:00 PM",
+        venue: "Amphitheatre",
+        description: "Melodies, magic, and musical mastery—witness the grand finale!"
+      }
+    ]
+  };
 
 export interface Artist {
     id: number;
@@ -205,7 +188,7 @@ export const infoCards = [
     {
         icon: "Calendar",
         title: "Dates & Time",
-        description: "March 15-17, 2025 | 10:00 AM - 10:00 PM",
+        description: "April 21-22, 2025 | 10:00 AM - 10:00 PM",
     },
     {
         icon: "Music",

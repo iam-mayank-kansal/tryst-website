@@ -6,11 +6,13 @@ import Registration from "@/components/registration"
 import Gallery from "@/components/gallery"
 import Contact from "@/components/contact"
 import Footer from "@/components/footer"
+import FeaturedArtist from "@/components/featured-artist"
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-background">
       <Hero />
+      <FeaturedArtist/>
       <About />
       <Events />
       <Artists />
