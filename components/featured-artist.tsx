@@ -52,7 +52,7 @@ export default function FeaturedArtist() {
   const artist = {
     name: "Aman Raj Gill",
     genre: "Indie Folk / Pop",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqcI9jPM5zv0OkltVh9vdehktL-f6ZJnIOnQ&s", // Replace with actual image
+    image: "/amanrajgill.png",
     shortBio:
       "Aman Raj Gill is a rising star in the indie music scene, known for his soulful vocals and heartfelt lyrics that blend traditional folk elements with contemporary pop sensibilities.",
     fullBio:
@@ -61,11 +61,6 @@ export default function FeaturedArtist() {
       date: "April 22, 2025",
       time: "5:00 PM",
       venue: "Main Stage",
-      socialLinks: {
-        instagram: "https://instagram.com",
-        spotify: "https://spotify.com",
-        youtube: "https://youtube.com",
-      },
     },
   }
 
@@ -101,7 +96,7 @@ export default function FeaturedArtist() {
         >
           {/* Artist Image */}
           <motion.div className="lg:w-1/2 relative" variants={imageVariants}>
-            <div className="relative overflow-hidden rounded-xl shadow-2xl shadow-[#ffcc00]/10 group max-h-[600px]">
+            <div className="relative overflow-hidden rounded-xl group max-h-[600px]">
               <Image
                 src={artist.image || "/placeholder.svg"}
                 alt={artist.name}
@@ -173,33 +168,6 @@ export default function FeaturedArtist() {
               <Button variant="outline" className="border-[#ffcc00] text-[#ffcc00] hover:bg-[#ffcc00]/10" asChild>
                 <a href="#registration">Register to Attend</a>
               </Button>
-            </motion.div>
-
-            <motion.div className="flex gap-4" variants={itemVariants}>
-              <a
-                href={artist.performance.socialLinks.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-[#3a0066] flex items-center justify-center hover:bg-[#ffcc00] hover:text-[#1a0033] transition-colors duration-300"
-              >
-                <ExternalLink className="w-5 h-5" />
-              </a>
-              <a
-                href={artist.performance.socialLinks.spotify}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-[#3a0066] flex items-center justify-center hover:bg-[#ffcc00] hover:text-[#1a0033] transition-colors duration-300"
-              >
-                <ExternalLink className="w-5 h-5" />
-              </a>
-              <a
-                href={artist.performance.socialLinks.youtube}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-[#3a0066] flex items-center justify-center hover:bg-[#ffcc00] hover:text-[#1a0033] transition-colors duration-300"
-              >
-                <ExternalLink className="w-5 h-5" />
-              </a>
             </motion.div>
           </motion.div>
         </motion.div>

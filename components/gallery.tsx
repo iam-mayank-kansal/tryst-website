@@ -2,10 +2,9 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { motion, Variants } from "framer-motion";
-import { galleryImages } from "@/utils/data"; // Import dummy data
+import { galleryImages } from "@/utils/data";
+import { Dialog, DialogContent } from "@radix-ui/react-dialog";
 
 export default function Gallery() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -16,7 +15,7 @@ export default function Gallery() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2, // Stagger animations for children
+        staggerChildren: 0.2,
       },
     },
   };
@@ -56,63 +55,35 @@ export default function Gallery() {
             className="text-white max-w-3xl mx-auto text-base sm:text-lg px-2"
             variants={fadeInUp}
           >
-            Relive the memories from previous editions of TRYST through our gallery.
+            Relive the memories from TRYST 2025 through our gallery.
           </motion.p>
         </motion.div>
 
-        {/* Tabs Section */}
-        <Tabs defaultValue="2024" className="w-full">
-          <TabsList className="grid w-full max-w-xs sm:max-w-md mx-auto grid-cols-3 mb-4 sm:mb-8 bg-[#3a0066]">
-            <TabsTrigger
-              value="2024"
-              className="data-[state=active]:bg-[#ffcc00] data-[state=active]:text-[#1a0033]"
+        {/* Gallery Images Grid */}
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+        >
+          {galleryImages["2025"].map((image, index) => (
+            <motion.div
+              key={index}
+              className="overflow-hidden rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+              onClick={() => setSelectedImage(image)}
+              variants={fadeInUp}
             >
-              2024
-            </TabsTrigger>
-            <TabsTrigger
-              value="2023"
-              className="data-[state=active]:bg-[#ffcc00] data-[state=active]:text-[#1a0033]"
-            >
-              2023
-            </TabsTrigger>
-            <TabsTrigger
-              value="2022"
-              className="data-[state=active]:bg-[#ffcc00] data-[state=active]:text-[#1a0033]"
-            >
-              2022
-            </TabsTrigger>
-          </TabsList>
-
-          {/* Gallery Images Grid */}
-          {Object.entries(galleryImages).map(([year, images]) => (
-            <TabsContent key={year} value={year} className="mt-0">
-              <motion.div
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={containerVariants}
-              >
-                {images.map((image, index) => (
-                  <motion.div
-                    key={index}
-                    className="overflow-hidden rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                    onClick={() => setSelectedImage(image)}
-                    variants={fadeInUp}
-                  >
-                    <Image
-                      src={image || "/placeholder.svg"}
-                      alt={`TRYST ${year} - Image ${index + 1}`}
-                      width={800}
-                      height={600}
-                      className="w-full h-48 sm:h-56 md:h-64 object-cover"
-                    />
-                  </motion.div>
-                ))}
-              </motion.div>
-            </TabsContent>
+              <Image
+                src={image || "/placeholder.svg"}
+                alt={`TRYST 2025 - Image ${index + 1}`}
+                width={800}
+                height={600}
+                className="w-full h-48 sm:h-56 md:h-64 object-cover"
+              />
+            </motion.div>
           ))}
-        </Tabs>
+        </motion.div>
 
         {/* Image Dialog */}
         <Dialog
@@ -120,7 +91,8 @@ export default function Gallery() {
           onOpenChange={(open) => !open && setSelectedImage(null)}
         >
           {selectedImage && (
-            <DialogContent className="max-w-[95vw] md:max-w-4xl bg-[#1a0033]/95 border-[#ffcc00] p-2 sm:p-6">
+            <DialogContent  
+             className="max-w-[95vw] md:max-w-4xl bg-[#1a0033]/95 border-[#ffcc00] p-2 sm:p-6">
               <div className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh]">
                 <Image
                   src={selectedImage || "/placeholder.svg"}
