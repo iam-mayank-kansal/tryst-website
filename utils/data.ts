@@ -45,7 +45,7 @@ export const events = {
     {
       title: "Maniera: Atrang Rangmanch (Art Exhibition)",
       time: "11:00 AM - 3:00 PM",
-      venue: "Lecture Hall 1",
+      venue: "Parking Area near Girl's Hostel", // Updated venue
       description: "A creative explosion of colors, strokes, and imagination—an artist's paradise!",
       registrationLink: "https://docs.google.com/forms/d/e/1FAIpQLSe1wUmMIYA0sm31-YeuWnpjR4Cn-gmjc2HOn5l6FG-U4poE6A/viewform"
     },
@@ -72,7 +72,7 @@ export const events = {
     },
     {
       title: "Vagmita Poetry - Irshaad (Literary Events)",
-      time: "11:00 AM - 1:00 PM", // Updated time
+      time: "11:00 AM - 1:00 PM",
       venue: "LT-4",
       description: "Where words weave magic—poetry, storytelling, and literature at its best!",
       registrationLink: "https://linktr.ee/PoetryVagmita?utm_source=linktree_admin_share"
@@ -125,14 +125,14 @@ export const events = {
     },
     {
       title: "Vagmita Poetry - Kagaaz (Poetry Slam)",
-      time: "10:30 AM - 12:30 PM", // Updated time
+      time: "10:30 AM - 12:30 PM",
       venue: "LT 4",
       description: "Verses with voices, emotions that echo!",
       registrationLink: "https://forms.gle/mDL6RBLtjcueGQJ39"
     },
     {
       title: "Vagmita Poetry - Evince",
-      time: "1:00 PM - 3:30 PM", // Updated time
+      time: "1:00 PM - 3:30 PM",
       venue: "LT 4",
       description: "Literary event showcasing creative writing",
       registrationLink: "https://docs.google.com/forms/d/e/1FAIpQLSf56DJZ9rfYwjPAGK9nBk9YtrBJPTTwICD5EQMqKlla_YF7MA/viewform"
