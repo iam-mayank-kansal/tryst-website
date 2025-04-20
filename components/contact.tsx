@@ -166,7 +166,7 @@ export default function Contact() {
                   <Mail className="h-6 w-6 text-[#ffcc00] mr-4 mt-1" />
                   <div>
                     <h4 className="text-white font-semibold mb-1">Email</h4>
-                    <p className="text-gray-300">tryst.com</p>
+                    <p className="text-gray-300">contact@theyoungtechies.com</p>
                   </div>
                 </div>
 

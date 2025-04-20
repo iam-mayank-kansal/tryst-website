@@ -59,7 +59,7 @@ export default function FeaturedArtist() {
       "Aman Raj Gill is a rising star in the indie music scene, known for his soulful vocals and heartfelt lyrics that blend traditional folk elements with contemporary pop sensibilities. Born and raised in Delhi, Aman discovered his passion for music at an early age, teaching himself guitar and writing his first songs as a teenager.\n\nAfter graduating from Delhi University, he began performing at local venues and quickly gained a following for his authentic sound and captivating stage presence. His debut EP 'Echoes of Home' received critical acclaim, with the lead single 'Midnight Rain' amassing over a million streams across platforms.\n\nAman's music draws inspiration from his personal experiences and observations of life in urban India, creating a unique sound that resonates with listeners across generations. His performances are known for creating intimate connections with the audience, regardless of venue size.",
     performance: {
       date: "April 22, 2025",
-      time: "7:00 PM",
+      time: "5:00 PM",
       venue: "Main Stage",
       socialLinks: {
         instagram: "https://instagram.com",

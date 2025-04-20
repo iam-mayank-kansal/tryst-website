@@ -185,7 +185,7 @@ export default function Footer() {
           transition={{ duration: 0.8, delay: 0.5 }}
         >
           <p className="text-gray-300 text-sm">
-            &copy; {new Date().getFullYear()} TRYST 2025, Keshav Mahavidyalaya. All rights reserved.
+            &copy; {new Date().getFullYear()} TRYST 2025, Keshav Mahavidyalaya. All rights reserved. <br /><span className="text-xl">Created by <Link href={"https://theyoungtechies.com/"} target="_blank" className="text-yellow-400">theyoungtechies</Link></span>
           </p>
         </motion.div>
       </div>
