@@ -130,7 +130,7 @@ export default function Footer() {
                   className="hover:text-[#ffcc00] transition-colors"
                   whileHover={{ color: "#ffcc00", x: 5 }}
                 >
-                  tryst2025@keshav.du.ac.in
+                  contact@theyoungtechies.com
                 </motion.a>
               </li>
               <li className="text-gray-300">
@@ -140,7 +140,7 @@ export default function Footer() {
                   className="hover:text-[#ffcc00] transition-colors"
                   whileHover={{ color: "#ffcc00", x: 5 }}
                 >
-                  +91 98765 43210
+                  +91 93102 56281
                 </motion.a>
               </li>
               <li className="text-gray-300">
