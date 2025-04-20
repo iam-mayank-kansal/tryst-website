@@ -34,7 +34,8 @@ export default function Contact() {
                   <Phone className="h-6 w-6 text-[#ffcc00] mr-4 mt-1" />
                   <div>
                     <h4 className="text-white font-semibold mb-1">Phone</h4>
-                    <p className="text-gray-300">+91 9310256281 (General Inquiries)</p>
+                    <p className="text-gray-300">+91 93102 56281 (Tech Related Inquiries)</p>
+                    <p className="text-gray-300">+91 93504 53034 (General Inquiries)</p>
                   </div>
                 </div>
               </div>
