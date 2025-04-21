@@ -1,5 +1,4 @@
 "use client"
-
 import Link from "next/link"
 import { Facebook, Instagram, Twitter, Youtube } from "lucide-react"
 import { motion, type Variants } from "framer-motion"

@@ -2,7 +2,7 @@
 import { useState, useRef } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Clock, ExternalLink, MapPin, ChevronDown, Calendar, Users } from 'lucide-react'
+import { Clock, ExternalLink, MapPin, ChevronDown, Calendar } from 'lucide-react'
 import { motion, AnimatePresence, Variants } from "framer-motion"
 import { Button } from "./ui/button"
 import { events } from "@/utils/data"

@@ -1,5 +1,4 @@
 "use client";
-
 import { motion, type Variants } from "framer-motion";
 import { Calendar, MapPin, Music, Users, Award, Star } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";

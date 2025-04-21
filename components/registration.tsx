@@ -1,7 +1,6 @@
 "use client"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Toaster } from "react-hot-toast"
 import { motion, type Variants } from "framer-motion"
 import { Calendar, Users, Award, ArrowRight } from "lucide-react"
 
@@ -187,17 +186,7 @@ export default function Registration() {
             </motion.div>
           </motion.div>
         </div>
-      </div>
-      <Toaster
-        position="top-center"
-        toastOptions={{
-          style: {
-            background: "#3a0066",
-            color: "#fff",
-            border: "1px solid rgba(255, 204, 0, 0.3)",
-          },
-        }}
-      />
+      </div>   
     </section>
   )
 }
